@@ -4,6 +4,7 @@ Util functions
 
 import numpy as np
 import struct
+import matplotlib.pyplot as plt
 
 def read_idx(filename):
     with open(filename) as f:
@@ -17,13 +18,20 @@ def read_idx(filename):
 def cross_entropy(
     output: np.ndarray, 
     truth: np.ndarray,
-    category: int
 ) -> tuple[float, np.ndarray]:
+    # print(output)
+    # print(truth)
+    # print(np.sum(truth * np.log(output), axis=1))
     loss = -1 * np.mean(
         np.sum(truth * np.log(output), axis=1)
         )
+    # print(loss)
     # Gradient of cross entropy and softmax
     grad = np.sum(output - truth, axis=0) / truth.shape[0]
+    # print(output - truth)
+    # print(np.sum(output - truth, axis=0))
+    # print(grad)
+    # exit()
     return loss, grad
 
 def evaluate(
@@ -46,3 +54,16 @@ def batchfy_data(data: np.ndarray, bs: int=1) -> list:
         batch_data += [data[batch_start : min(batch_start + bs, len(data))]]
         batch_start += bs
     return batch_data
+
+
+def draw_plt(filename):
+    with open(filename, "r") as f:
+        data = eval(f.read())
+
+    plt.plot([i for i, _ in enumerate(data)], data)
+
+    plt.title('Line Plot Example')
+    plt.xlabel('Index')
+    plt.ylabel('Value')
+
+    plt.savefig("test.png")
