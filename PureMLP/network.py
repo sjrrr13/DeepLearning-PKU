@@ -269,9 +269,9 @@ def train(
 
 
 def main():
-    filename = "seed_1000_2"
+    filename = "base"
     network = MLPNet(
-        network=[28*28, 512, 16*16, 10],
+        network=[28*28, 256, 64, 10],
         learn_rate=1e-6,
         category=CATEGORY,
         l1=0,
@@ -289,7 +289,7 @@ def main():
         for r in log:
             f.write(json.dumps(r) + "\n")
 
-    draw_plt(filename, title="Add a layer")
+    draw_plt(filename, title="Base")
 
 
 if __name__ == "__main__":
