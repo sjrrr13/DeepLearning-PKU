@@ -88,7 +88,7 @@ def batchfy_data(data: np.ndarray, label: np.ndarray, bs: int=1) -> list:
 def draw_plt(filename, title):
     loss = []
     acc = []
-    with open(f"./Output/{filename}.jsonl", "r") as f:
+    with open(f"./Result/{filename}.jsonl", "r") as f:
         for line in f:
             data = json.loads(line)
             loss.append(data["loss"])
@@ -98,12 +98,12 @@ def draw_plt(filename, title):
     plt.title(f"Loss of {title}")
     plt.xlabel('epoch')
     plt.ylabel('Loss')
-    plt.savefig(f"./Figs/{filename}-loss.png")
+    plt.savefig(f"./Result/Figs/{filename}-loss.png")
     
     plt.close()
     plt.plot(acc)
     plt.title(f"Accuracy of {title}")
     plt.xlabel('epoch')
     plt.ylabel('Accuracy')
-    plt.savefig(f"./Figs/{filename}-acc.png")
+    plt.savefig(f"./Result/Figs/{filename}-acc.png")
     

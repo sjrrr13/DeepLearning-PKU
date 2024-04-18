@@ -14,6 +14,8 @@ SGD = 1
 MBGD = 2
 MBSGD = 3
 
+np.random.seed(2024)
+
 class Layer:
     def __init__(self):
         pass
@@ -118,7 +120,9 @@ class MLPNet:
         self, 
         network, 
         learn_rate: float,
-        category: int
+        category: int,
+        l1: int,
+        l2: int
     ):
         self.layers = []
         self.learn_rate = learn_rate
@@ -126,10 +130,10 @@ class MLPNet:
         assert network[-1] == category, "Output of the last hidden layer must match categories"
 
         for i in range(len(network) - 2):
-            self.layers.append(FCLayer(network[i], network[i + 1]))
+            self.layers.append(FCLayer(network[i], network[i + 1], l1=l1, l2=l2))
             self.layers.append(SigmoidLayer())
 
-        self.layers.append(FCLayer(network[-2], network[-1]))
+        self.layers.append(FCLayer(network[-2], network[-1], l1=l1, l2=l2))
         self.layers.append(SoftmaxLayer())
 
     def forward(self, v: np.ndarray) -> np.ndarray:
@@ -265,24 +269,27 @@ def train(
 
 
 def main():
-    filename = "train"
+    filename = "seed_1000_2"
     network = MLPNet(
-        network=[28*28, 16*16, 10],
-        learn_rate=1e-5,
-        category=CATEGORY
+        network=[28*28, 512, 16*16, 10],
+        learn_rate=1e-6,
+        category=CATEGORY,
+        l1=0,
+        l2=0
     )
     train_img, train_label, test_img, test_label = load_MNIST()
 
     log = train(network, train_img, train_label, test_img, test_label,
-          type=MBSGD, 
-          epoch=10000,
-          bs=60)
+          type=BGD, 
+          epoch=1000,
+          step_size=0,
+          gamma=1.0)
 
-    with open(f"./Output/{filename}.jsonl", "w") as f:
+    with open(f"./Result/{filename}.jsonl", "w") as f:
         for r in log:
             f.write(json.dumps(r) + "\n")
 
-    draw_plt(filename, title="train-plot")
+    draw_plt(filename, title="Add a layer")
 
 
 if __name__ == "__main__":
