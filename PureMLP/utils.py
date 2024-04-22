@@ -107,3 +107,6 @@ def draw_plt(filename, title):
     plt.ylabel('Accuracy')
     plt.savefig(f"./Result/Figs/{filename}-acc.png")
     
+
+if __name__ == "__main__":
+    draw_plt("rm_layer", "Xavier")
