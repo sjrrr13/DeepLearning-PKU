@@ -281,9 +281,7 @@ def main():
 
     log = train(network, train_img, train_label, test_img, test_label,
           type=BGD, 
-          epoch=1000,
-          step_size=0,
-          gamma=1.0)
+          epoch=1000)
 
     with open(f"./Result/{filename}.jsonl", "w") as f:
         for r in log:

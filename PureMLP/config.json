@@ -1,0 +1,102 @@
+{
+    "base": {
+        "net": "784-256-64-10",
+        "lr": 1e-6,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "add_layer": {
+        "net": "784-512-256-64-10",
+        "lr": 1e-6,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "rm_layer": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "rand_init": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "type": "BGD",
+        "epoch": 1000,
+        "init_w": "random"
+    },
+    "lr_decay_1": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "type": "BGD",
+        "epoch": 1000,
+        "step_size": 200,
+        "gamma": 0.5,
+        "init_w": "random"
+    },
+    "lr_decay_2": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "type": "BGD",
+        "epoch": 1000,
+        "gamma": 0.99,
+        "init_w": "random"
+    },
+    "l1": {
+        "net": "784-256-64-10",
+        "lr": 1e-6,
+        "l1": 0.01,
+        "type": "BGD",
+        "epoch": 1000,
+        "init_w": "random"
+    },
+    "l2": {
+        "net": "784-256-64-10",
+        "lr": 1e-6,
+        "l2": 0.01,
+        "type": "BGD",
+        "epoch": 1000,
+        "init_w": "random"
+    },
+    "l1-2": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "l1": 0.01,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "l2-2": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "l2": 0.01,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "l1-3": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "l1": 0.1,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "l2-3": {
+        "net": "784-256-10",
+        "lr": 1e-6,
+        "l2": 0.1,
+        "type": "BGD",
+        "epoch": 1000
+    },
+    "mbsgd":  {
+        "net": "784-256-10",
+        "lr": 1e-5,
+        "type": "MBSGD",
+        "epoch": 10000,
+        "bs": 60
+    },
+    "mbsgd_2":  {
+        "net": "784-256-10",
+        "lr": 5e-6,
+        "type": "MBSGD",
+        "epoch": 10000,
+        "bs": 60
+    }
+}
